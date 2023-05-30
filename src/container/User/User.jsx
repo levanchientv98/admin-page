@@ -1,10 +1,11 @@
 import React from "react";
 import { PrimaryLayout } from "../../components/Layout";
+import TableUser from "components/TableUser";
 
 const User = () => {
     return (
         <PrimaryLayout title={"User"}>
-            <div>User-Page</div>
+            <TableUser></TableUser>
         </PrimaryLayout>
     );
 };
