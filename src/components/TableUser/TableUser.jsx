@@ -5,7 +5,7 @@ import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 const TableUser = () => {
     const [form] = Form.useForm();
     const [isEditing, setIsEditing] = useState(false);
-    const [editingStudent, setEditingStudent] = useState(null);
+    const [editingUser, setEditingUser] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleOk = () => {
@@ -14,6 +14,16 @@ const TableUser = () => {
 
     const handleCancel = () => {
         setIsModalOpen(false);
+    };
+    const onReset = () => {
+        form.resetFields();
+    };
+
+    const tailLayout = {
+        wrapperCol: {
+            offset: 8,
+            span: 16,
+        },
     };
 
     const [dataSource] = useState([
@@ -72,12 +82,13 @@ const TableUser = () => {
                     <>
                         <EditOutlined
                             onClick={() => {
-                                onEditStudent(record);
+                                onEditUser(record);
                             }}
+                            style={{ color: "#097017" }}
                         />
                         <DeleteOutlined
                             onClick={() => {
-                                onDeleteStudent(record);
+                                onDeleteUser(record);
                             }}
                             style={{ color: "red", marginLeft: 12 }}
                         />
@@ -96,7 +107,7 @@ const TableUser = () => {
             email: values.user.email,
             address: values.user.address,
         };
-        // Update the students state with the new student
+        // Update the Users state with the new user
         setUsers([...users, newUser]);
         setIsModalOpen(false); // Close the modal after submitting the form
     };
@@ -105,27 +116,27 @@ const TableUser = () => {
         setIsModalOpen(true);
     };
 
-    const onDeleteStudent = (record) => {
+    const onDeleteUser = (record) => {
         Modal.confirm({
             title: "Are you sure you want to delete this user record?",
             okText: "Yes",
             okType: "danger",
             onOk: () => {
-                setUsers((prevStudents) => {
-                    return prevStudents.filter((student) => student.id !== record.id);
+                setUsers((prevUser) => {
+                    return prevUser.filter((user) => user.id !== record.id);
                 });
             },
         });
     };
 
-    const onEditStudent = (record) => {
+    const onEditUser = (record) => {
         setIsEditing(true);
-        setEditingStudent({ ...record });
+        setEditingUser({ ...record });
     };
 
     const resetEditing = () => {
         setIsEditing(false);
-        setEditingStudent(null);
+        setEditingUser(null);
     };
 
     return (
@@ -135,20 +146,21 @@ const TableUser = () => {
                     Add a new User
                 </Button>
             </Space>
+            <Table columns={columns} dataSource={users} />
+
             <Modal
                 footer={null}
                 title="Add User"
-                visible={isModalOpen}
+                open={isModalOpen}
                 onOk={handleOk}
                 onCancel={handleCancel}
             >
                 <Form
                     form={form}
-                    name="nest-messages"
+                    name="validateOnly"
+                    layout="vertical"
                     onFinish={onFinish}
-                    style={{
-                        maxWidth: 600,
-                    }}
+
                 >
                     <Form.Item
                         name={["user", "name"]}
@@ -186,28 +198,31 @@ const TableUser = () => {
                     >
                         <Input />
                     </Form.Item>
-                    <Form.Item>
-                        <Button type="primary" htmlType="submit">
-                            Add
-                        </Button>
+                    <Form.Item  {...tailLayout}>
+                        <Space size={"middle"}>
+                            <Button type="primary" htmlType="submit" style={{ marginLeft: 12 }}>
+                                Add
+                            </Button>
+                            <Button htmlType="button" onClick={onReset}>
+                                Reset
+                            </Button>
+                        </Space>
                     </Form.Item>
                 </Form>
             </Modal>
 
-            <Table columns={columns} dataSource={users} />
-
             <Modal
                 title="Edit User"
-                visible={isEditing}
+                open={isEditing}
                 okText="Save"
                 onCancel={resetEditing}
                 onOk={() => {
-                    setUsers((prevStudents) =>
-                        prevStudents.map((student) => {
-                            if (student.id === editingStudent.id) {
-                                return editingStudent;
+                    setUsers((prevUser) =>
+                        prevUser.map((user) => {
+                            if (user.id === editingUser.id) {
+                                return editingUser;
                             } else {
-                                return student;
+                                return user;
                             }
                         })
                     );
@@ -226,10 +241,10 @@ const TableUser = () => {
                         ]}
                     >
                         <Input
-                            value={editingStudent?.name}
+                            value={editingUser?.name}
                             onChange={(e) =>
-                                setEditingStudent((prevStudent) => ({
-                                    ...prevStudent,
+                                setEditingUser((prevUser) => ({
+                                    ...prevUser,
                                     name: e.target.value,
                                 }))
                             }
@@ -246,10 +261,10 @@ const TableUser = () => {
                         ]}
                     >
                         <Input
-                            value={editingStudent?.email}
+                            value={editingUser?.email}
                             onChange={(e) =>
-                                setEditingStudent((prevStudent) => ({
-                                    ...prevStudent,
+                                setEditingUser((prevUser) => ({
+                                    ...prevUser,
                                     email: e.target.value,
                                 }))
                             }
@@ -266,10 +281,10 @@ const TableUser = () => {
                         ]}
                     >
                         <Input
-                            value={editingStudent?.address}
+                            value={editingUser?.address}
                             onChange={(e) =>
-                                setEditingStudent((prevStudent) => ({
-                                    ...prevStudent,
+                                setEditingUser((prevUser) => ({
+                                    ...prevUser,
                                     address: e.target.value,
                                 }))
                             }
