@@ -1,6 +1,6 @@
 import { Button, Table, Modal, Input, Space, Form } from "antd";
 import React, { useState } from "react";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { EditOutlined, DeleteOutlined, UserAddOutlined, UserSwitchOutlined } from "@ant-design/icons";
 
 const TableUser = () => {
     const [form] = Form.useForm();
@@ -80,6 +80,13 @@ const TableUser = () => {
             render: (record) => {
                 return (
                     <>
+                        <UserSwitchOutlined
+                            onClick={() => {
+                                onDecentralization(record);
+                            }}
+                            style={{ color: "#5574ff", marginRight: 12 }}
+                        />
+
                         <EditOutlined
                             onClick={() => {
                                 onEditUser(record);
@@ -92,6 +99,7 @@ const TableUser = () => {
                             }}
                             style={{ color: "red", marginLeft: 12 }}
                         />
+
                     </>
                 );
             },
@@ -114,6 +122,10 @@ const TableUser = () => {
 
     const onAddUser = () => {
         setIsModalOpen(true);
+    };
+
+    const onDecentralization = () => {
+
     };
 
     const onDeleteUser = (record) => {
@@ -143,6 +155,7 @@ const TableUser = () => {
         <>
             <Space wrap>
                 <Button type="primary" onClick={onAddUser}>
+                    <UserAddOutlined />
                     Add a new User
                 </Button>
             </Space>
