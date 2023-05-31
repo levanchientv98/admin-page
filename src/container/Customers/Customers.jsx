@@ -32,7 +32,7 @@ const Customers = () => {
 
 
     return (
-        <PrimaryLayout>
+        <PrimaryLayout title={"Customer"}>
             <Table columns={columns} dataSource={usersStore.listUser}></Table>
         </PrimaryLayout>
     );

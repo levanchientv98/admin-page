@@ -1,12 +1,17 @@
 import { Button, Table, Modal, Input, Space, Form } from "antd";
 import React, { useState } from "react";
 import { EditOutlined, DeleteOutlined, UserAddOutlined, UserSwitchOutlined } from "@ant-design/icons";
+import { useDispatch, useSelector } from "react-redux";
+
 
 const TableUser = () => {
     const [form] = Form.useForm();
     const [isEditing, setIsEditing] = useState(false);
     const [editingUser, setEditingUser] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+
+
 
     const handleOk = () => {
         setIsModalOpen(false);
@@ -26,32 +31,32 @@ const TableUser = () => {
         },
     };
 
-    const [dataSource] = useState([
-        {
-            id: 1,
-            name: "John",
-            email: "john@gmail.com",
-            address: "John Address",
-        },
-        {
-            id: 2,
-            name: "David",
-            email: "david@gmail.com",
-            address: "David Address",
-        },
-        {
-            id: 3,
-            name: "James",
-            email: "james@gmail.com",
-            address: "James Address",
-        },
-        {
-            id: 4,
-            name: "Sam",
-            email: "sam@gmail.com",
-            address: "Sam Address",
-        },
-    ]);
+    // const [dataSource] = useState([
+    //     {
+    //         id: 1,
+    //         name: "John",
+    //         email: "john@gmail.com",
+    //         address: "John Address",
+    //     },
+    //     {
+    //         id: 2,
+    //         name: "David",
+    //         email: "david@gmail.com",
+    //         address: "David Address",
+    //     },
+    //     {
+    //         id: 3,
+    //         name: "James",
+    //         email: "james@gmail.com",
+    //         address: "James Address",
+    //     },
+    //     {
+    //         id: 4,
+    //         name: "Sam",
+    //         email: "sam@gmail.com",
+    //         address: "Sam Address",
+    //     },
+    // ]);
 
     const columns = [
         {
@@ -106,17 +111,21 @@ const TableUser = () => {
         },
     ];
 
-    const [users, setUsers] = useState(dataSource);
+    // const [users, setUsers] = useState(dataSource);
+
+    const dispatch = useDispatch();
+    const usersStore = useSelector((state) => state.users);
 
     const onFinish = (values) => {
-        const newUser = {
-            id: (users.length + 1).toString(), // Generate a unique key for the new user
+        const newUser = [...usersStore.listUser, {
+            id: Math.floor(Math.random() * 100) + 1, // Generate a unique key for the new user
             name: values.user.name,
             email: values.user.email,
             address: values.user.address,
-        };
+        }];
         // Update the Users state with the new user
-        setUsers([...users, newUser]);
+        dispatch.users.setListUser(newUser);
+        // setUsers([...users, newUser]);
         setIsModalOpen(false); // Close the modal after submitting the form
     };
 
@@ -134,9 +143,10 @@ const TableUser = () => {
             okText: "Yes",
             okType: "danger",
             onOk: () => {
-                setUsers((prevUser) => {
-                    return prevUser.filter((user) => user.id !== record.id);
-                });
+                const deleteUser = usersStore.listUser.filter(
+                    (user) => user.id !== record.id
+                );
+                dispatch.users.setListUser(deleteUser)
             },
         });
     };
@@ -159,7 +169,7 @@ const TableUser = () => {
                     Add a new User
                 </Button>
             </Space>
-            <Table columns={columns} dataSource={users} />
+            <Table columns={columns} dataSource={usersStore.listUser} />
 
             <Modal
                 footer={null}
@@ -230,15 +240,17 @@ const TableUser = () => {
                 okText="Save"
                 onCancel={resetEditing}
                 onOk={() => {
-                    setUsers((prevUser) =>
-                        prevUser.map((user) => {
+                    const updateUser = usersStore.listUser.map(
+                        (user) => {
+
                             if (user.id === editingUser.id) {
                                 return editingUser;
                             } else {
                                 return user;
                             }
-                        })
+                        }
                     );
+                    dispatch.users.setListUser(updateUser)
                     resetEditing();
                 }}
             >
@@ -301,7 +313,7 @@ const TableUser = () => {
                         />
                     </Form.Item>
                 </Form>
-            </Modal>
+            </Modal >
         </>
     );
 };
