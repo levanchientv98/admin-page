@@ -231,7 +231,6 @@ const TableUser = () => {
             >
                 <Form form={form} name="validateOnly" layout="vertical">
                     <Form.Item
-                        name="name"
                         label="Name"
                         rules={[
                             {
@@ -251,7 +250,6 @@ const TableUser = () => {
                         />
                     </Form.Item>
                     <Form.Item
-                        name="email"
                         label="Email"
                         rules={[
                             {
@@ -271,7 +269,6 @@ const TableUser = () => {
                         />
                     </Form.Item>
                     <Form.Item
-                        name="address"
                         label="Address"
                         rules={[
                             {
