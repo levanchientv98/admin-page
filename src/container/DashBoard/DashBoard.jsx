@@ -1,11 +1,33 @@
+import { Chart, Chart2 } from "components/Chart";
 import React from "react";
-import { PrimaryLayout } from "components/Layout";
+import styled from "styled-components";
+
+
+const StyleDashBoard = styled.div`
+  display:flex;
+  flex-direction: column;
+  background-color: #fff;  
+  
+  .recharts-default-legend{
+    display: grid;
+    grid-template-columns: auto auto;
+    
+    width: 400px;
+    gap: 20px;
+  }
+
+  .recharts-legend-item{
+    display: flex !important;
+    
+  }
+`;
 
 const DashBoard = () => {
     return (
-        <PrimaryLayout title={"DashBoard"}>
-            <div>DashBoard</div>
-        </PrimaryLayout>
+        <StyleDashBoard> <Chart></Chart>
+            <Chart2></Chart2>
+        </StyleDashBoard>
+
     );
 };
 

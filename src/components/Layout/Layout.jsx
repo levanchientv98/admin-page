@@ -1,8 +1,8 @@
 import React from "react";
 import { UserOutlined, TeamOutlined, DesktopOutlined, ShoppingCartOutlined, GiftOutlined, DashboardOutlined } from '@ant-design/icons';
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import { Layout, Menu, theme } from 'antd';
 import { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { useSelector } from "react-redux";
 import avarta from "image/avarta.svg";
@@ -71,29 +71,13 @@ const PrimaryLayout = ({ children, title }) => {
                         gap: 20,
                     }}> <span >{loggedinUser.username}</span> <img src={avarta} alt="avarta" /></div>
                     </Header>
+                    <Outlet />
                     <Content
                         style={{
                             margin: '0 16px',
                         }}
                     >
-                        <Breadcrumb
-                            style={{
-                                margin: '16px 0',
-                            }}
-                        >
-                            <Breadcrumb.Item>User</Breadcrumb.Item>
-                            <Breadcrumb.Item>{loggedinUser.username}</Breadcrumb.Item>
-                        </Breadcrumb>
-                        <div
-                            style={{
-                                padding: 24,
-                                minHeight: 360,
-                                background: colorBgContainer,
-                            }}
-                        >
-                            {children}
-
-                        </div>
+                        {children}
                     </Content>
                     <Footer
                         style={{

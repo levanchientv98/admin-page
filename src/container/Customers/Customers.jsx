@@ -1,10 +1,9 @@
 import { Table } from 'antd';
-import { PrimaryLayout } from 'components/Layout';
 import { useSelector } from 'react-redux'
 
 const Customers = () => {
 
-    const usersStore = useSelector((state) => state.users);
+    const customersStore = useSelector((state) => state.customers);
 
 
     const columns = [
@@ -32,9 +31,7 @@ const Customers = () => {
 
 
     return (
-        <PrimaryLayout title={"Customer"}>
-            <Table columns={columns} dataSource={usersStore.listUser}></Table>
-        </PrimaryLayout>
+        <Table columns={columns} dataSource={customersStore.listCustomers}></Table>
     );
 };
 

@@ -31,10 +31,10 @@ export const customers = {
     }, // initial state
     reducers: {
         // handle state changes with pure functions
-        setListCustomers(state, listUser) {
+        setListCustomers(state, listCustomers) {
             return {
                 ...state,
-                listUser,
+                listCustomers,
             };
         },
         setCount(state, count) {
