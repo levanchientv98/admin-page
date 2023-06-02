@@ -1,46 +1,15 @@
 
-const data = [
-    {
-        id: 1,
-        name: "John",
-        email: "john@gmail.com",
-        address: "John Address",
-        phone: "05898147584",
-    },
-    {
-        id: 2,
-        name: "David",
-        email: "david@gmail.com",
-        address: "David Address",
-        phone: "05898468434",
-    },
-    {
-        id: 3,
-        name: "James",
-        email: "james@gmail.com",
-        address: "James Address",
-        phone: "125184387621",
-    },
-    {
-        id: 4,
-        name: "Sam",
-        email: "sam@gmail.com",
-        address: "Sam Address",
-        phone: "0935530774",
-    },
-];
-
-export const users = {
+export const products = {
     state: {
-        listUser: data,
-        count: data.length,
+        listProduct: [],
+        count: 0,
     }, // initial state
     reducers: {
         // handle state changes with pure functions
-        setListUser(state, listUser) {
+        setListProduct(state, listProduct) {
             return {
                 ...state,
-                listUser,
+                listProduct,
             };
         },
         setCount(state, count) {
@@ -57,6 +26,12 @@ export const users = {
         //   await new Promise((resolve) => setTimeout(resolve, 1000));
         //   dispatch.count.increment(payload);
         // },
+        async fetchProducts() {
+            const data = await fetch('https://dummyjson.com/products')
+                .then(response => response.json());
+            this.setListProduct(data.products);
+        }
+
     }),
     selectors: (slice, createSelector) => ({
         selectCount() {

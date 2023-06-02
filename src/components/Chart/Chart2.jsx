@@ -1,5 +1,13 @@
 import React from 'react';
 import { RadialBarChart, RadialBar, Legend } from 'recharts';
+import styled from "styled-components";
+
+
+const StyleChart2 = styled.div`
+    display: flex;
+    flex-direction: column;
+
+`;
 
 const data = [
     {
@@ -47,24 +55,27 @@ export const Chart2 = () => {
 
     return (
         <>
-            <p
-                style={{
-                    color: "#4A4A65",
-                    fontWeight: 700,
-                    fontSize: "32px",
-                }}
-            >
-                Money Allocation
-            </p>
-            <RadialBarChart startAngle={90} endAngle={450} width={537} height={541} cx="50%" cy="50%" innerRadius="10%" outerRadius="80%" barSize={10} data={data}>
-                <RadialBar
-                    minAngle={15}
-                    background
-                    clockWise
-                    dataKey="uv"
-                />
-                <Legend iconType='circle' width={"50%"} iconSize={24} layout="horizontal" verticalAlign='middle' wrapperStyle={style} formatter={CustomizedLegend} />
-            </RadialBarChart>
+            <StyleChart2>
+                <p
+                    style={{
+                        color: "#4A4A65",
+                        fontWeight: 700,
+                        fontSize: "32px",
+                        margin: 0,
+                    }}
+                >
+                    Money Allocation
+                </p>
+                <RadialBarChart startAngle={90} endAngle={450} width={537} height={541} cx="50%" cy="50%" innerRadius="10%" outerRadius="80%" barSize={10} data={data}>
+                    <RadialBar
+                        minAngle={15}
+                        background
+                        clockWise
+                        dataKey="uv"
+                    />
+                    <Legend iconType='circle' width={"50%"} iconSize={24} layout="horizontal" verticalAlign='middle' wrapperStyle={style} formatter={CustomizedLegend} />
+                </RadialBarChart>
+            </StyleChart2>
         </>
     );
 };

@@ -2,7 +2,7 @@ import { Button, Table, Modal, Input, Space, Form } from "antd";
 import React, { useState } from "react";
 import { EditOutlined, DeleteOutlined, UserAddOutlined, UserSwitchOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-
+import Excel from "components/Excel";
 
 const TableUser = () => {
     const [form] = Form.useForm();
@@ -81,6 +81,11 @@ const TableUser = () => {
         },
         {
             key: "5",
+            title: "Phone",
+            dataIndex: "phone",
+        },
+        {
+            key: "6",
             title: "Actions",
             render: (record) => {
                 return (
@@ -168,6 +173,50 @@ const TableUser = () => {
                     <UserAddOutlined />
                     Add a new User
                 </Button>
+                <Excel
+                    fileName="export-user"
+                    data={[
+                        {
+                            columns: [
+                                {
+                                    title: "User Id",
+                                    dataIndex: "id",
+                                    width: 5,
+                                },
+                                {
+                                    title: "Name",
+                                    dataIndex: "name",
+                                    width: 20,
+                                },
+                                {
+                                    title: "Email",
+                                    dataIndex: "email",
+                                    width: 50,
+                                },
+                            ],
+                            data: usersStore.listUser,
+                            tabName: "info",
+                        },
+                        {
+                            columns: [
+                                {
+                                    title: "Name",
+                                    dataIndex: "name",
+                                    width: 30,
+                                },
+                                {
+                                    title: "Phone",
+                                    dataIndex: "phone",
+                                    width: 30,
+                                },
+                            ],
+                            data: usersStore.listUser,
+                            tabName: "contact",
+                        },
+                    ]}
+                >
+                    <Button>Export users</Button>
+                </Excel>
             </Space>
             <Table columns={columns} dataSource={usersStore.listUser} />
 

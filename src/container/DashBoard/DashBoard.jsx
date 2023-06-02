@@ -1,4 +1,4 @@
-import { Chart, Chart2 } from "components/Chart";
+import { Chart, Chart2, Chart3 } from "components/Chart";
 import React from "react";
 import styled from "styled-components";
 
@@ -6,7 +6,14 @@ import styled from "styled-components";
 const StyleDashBoard = styled.div`
   display:flex;
   flex-direction: column;
-  background-color: #fff;  
+  background-color: #fff; 
+  
+  .ChartGroup{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
   
   .recharts-default-legend{
     display: grid;
@@ -23,12 +30,16 @@ const StyleDashBoard = styled.div`
 `;
 
 const DashBoard = () => {
-    return (
-        <StyleDashBoard> <Chart></Chart>
-            <Chart2></Chart2>
-        </StyleDashBoard>
+  return (
+    <StyleDashBoard>
+      <Chart></Chart>
+      <div className="ChartGroup">
+        <Chart2></Chart2>
+        <Chart3></Chart3>
+      </div>
+    </StyleDashBoard>
 
-    );
+  );
 };
 
 export default DashBoard;
