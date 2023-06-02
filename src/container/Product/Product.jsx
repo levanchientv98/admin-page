@@ -140,9 +140,24 @@ const Product = () => {
             title: values.product.title,
             description: values.product.description,
             price: values.product.price,
+            discountPercentage: 12.96,
+            rating: 4.69,
+            stock: 94,
+            brand: "Apple",
+            category: "smartphones",
+            thumbnail: "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
+            images: [
+                "https://i.dummyjson.com/data/products/1/1.jpg",
+                "https://i.dummyjson.com/data/products/1/2.jpg",
+                "https://i.dummyjson.com/data/products/1/3.jpg",
+                "https://i.dummyjson.com/data/products/1/4.jpg",
+                "https://i.dummyjson.com/data/products/1/thumbnail.jpg"
+            ]
+
         }];
         // Update the Users state with the new user
-        dispatch.users.setListProduct(newProduct);
+        console.log(newProduct);
+        dispatch.products.setListProduct(newProduct);
         // setUsers([...users, newUser]);
         setIsModalOpen(false); // Close the modal after submitting the form
     };
@@ -161,10 +176,10 @@ const Product = () => {
             okText: "Yes",
             okType: "danger",
             onOk: () => {
-                const deleteUser = productsStore.listProduct.filter(
-                    (user) => user.id !== record.id
+                const deleteProduct = productsStore.listProduct.filter(
+                    (product) => product.id !== record.id
                 );
-                dispatch.users.setListProduct(deleteUser)
+                dispatch.products.setListProduct(deleteProduct)
             },
         });
     };
@@ -253,7 +268,7 @@ const Product = () => {
             </Modal>
 
             <Modal
-                title="Edit User"
+                title="Edit Product"
                 open={isEditing}
                 okText="Save"
                 onCancel={resetEditing}
@@ -274,58 +289,58 @@ const Product = () => {
             >
                 <Form form={form} name="validateOnly" layout="vertical">
                     <Form.Item
-                        label="Name"
+                        label="Product name"
                         rules={[
                             {
                                 required: true,
-                                message: "Please enter the name",
+                                message: "Please enter the product name",
                             },
                         ]}
                     >
                         <Input
-                            value={editingProduct?.name}
+                            value={editingProduct?.title}
                             onChange={(e) =>
                                 setEditingProduct((prevUser) => ({
                                     ...prevUser,
-                                    name: e.target.value,
+                                    title: e.target.value,
                                 }))
                             }
                         />
                     </Form.Item>
                     <Form.Item
-                        label="Email"
+                        label="Description"
                         rules={[
                             {
                                 required: true,
-                                message: "Please enter the email",
+                                message: "Please enter the description",
                             },
                         ]}
                     >
                         <Input
-                            value={editingProduct?.email}
+                            value={editingProduct?.description}
                             onChange={(e) =>
                                 setEditingProduct((prevUser) => ({
                                     ...prevUser,
-                                    email: e.target.value,
+                                    description: e.target.value,
                                 }))
                             }
                         />
                     </Form.Item>
                     <Form.Item
-                        label="Address"
+                        label="Price"
                         rules={[
                             {
                                 required: true,
-                                message: "Please enter the address",
+                                message: "Please enter price",
                             },
                         ]}
                     >
                         <Input
-                            value={editingProduct?.address}
+                            value={editingProduct?.price}
                             onChange={(e) =>
                                 setEditingProduct((prevUser) => ({
                                     ...prevUser,
-                                    address: e.target.value,
+                                    price: e.target.value,
                                 }))
                             }
                         />

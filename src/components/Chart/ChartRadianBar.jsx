@@ -51,7 +51,7 @@ const CustomizedLegend = (value, entry) => {
     );
 };
 
-export const Chart2 = () => {
+export const ChartRadianBar = () => {
 
     return (
         <>
@@ -80,4 +80,4 @@ export const Chart2 = () => {
     );
 };
 
-export default Chart2;
+export default ChartRadianBar;

@@ -1,5 +1,5 @@
-import Chart from './Chart';
-import Chart2 from './Chart2';
-import Chart3 from './Chart3';
+import ChartLine from './ChartLine';
+import ChartRadianBar from './ChartRadianBar';
+import ChartBar from './ChartBar';
 
-export { Chart, Chart2, Chart3 };
+export { ChartLine, ChartRadianBar, ChartBar };

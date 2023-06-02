@@ -127,6 +127,7 @@ const TableUser = () => {
             name: values.user.name,
             email: values.user.email,
             address: values.user.address,
+
         }];
         // Update the Users state with the new user
         dispatch.users.setListUser(newUser);

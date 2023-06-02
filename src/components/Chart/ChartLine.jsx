@@ -53,7 +53,7 @@ const data = [
     },
 ];
 
-export const Chart = () => {
+export const ChartLine = () => {
     const HiddenDot = () => (
         <circle cx={0} cy={0} r={0} fill="transparent" stroke="none" />
     );
@@ -103,4 +103,4 @@ export const Chart = () => {
     );
 };
 
-export default Chart
+export default ChartLine;

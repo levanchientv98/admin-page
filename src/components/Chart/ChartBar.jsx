@@ -48,7 +48,7 @@ const data = [
 
 
 
-const Chart3 = () => {
+const ChartBar = () => {
     return (
         <>
             <StyleChart3>
@@ -90,4 +90,4 @@ const Chart3 = () => {
     );
 };
 
-export default Chart3;
+export default ChartBar;

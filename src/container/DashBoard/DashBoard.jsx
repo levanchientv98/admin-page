@@ -1,4 +1,4 @@
-import { Chart, Chart2, Chart3 } from "components/Chart";
+import { ChartBar, ChartLine, ChartRadianBar } from "components/Chart";
 import React from "react";
 import styled from "styled-components";
 
@@ -32,10 +32,10 @@ const StyleDashBoard = styled.div`
 const DashBoard = () => {
   return (
     <StyleDashBoard>
-      <Chart></Chart>
+      <ChartLine></ChartLine>
       <div className="ChartGroup">
-        <Chart2></Chart2>
-        <Chart3></Chart3>
+        <ChartRadianBar></ChartRadianBar>
+        <ChartBar></ChartBar>
       </div>
     </StyleDashBoard>
 
