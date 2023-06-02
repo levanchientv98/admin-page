@@ -136,7 +136,7 @@ const Product = () => {
 
     const onFinish = (values) => {
         const newProduct = [...productsStore.listProduct, {
-            id: Math.floor(Math.random() * 100) + 1, // Generate a unique key for the new user
+            id: productsStore.listProduct.length + 1, // Generate a unique key for the new user
             title: values.product.title,
             description: values.product.description,
             price: values.product.price,
@@ -219,7 +219,7 @@ const Product = () => {
 
                 >
                     <Form.Item
-                        name={["product", "name"]}
+                        name={["product", "title"]}
                         label="Product name"
                         rules={[
                             {
